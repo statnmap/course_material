@@ -1,0 +1,74 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# userpackage
+
+<!-- badges: start -->
+<!-- badges: end -->
+<!-- description: start -->
+This is package {userpackage}: Analyse NYC Squirrel Dataset.  
+The aim of {userpackage} is to propose an example package built with "Rmd first" method during conferences and tutorials.
+Current version is 0.0.0.9000.
+<!-- description: end -->
+
+## Installation
+<!-- install: start -->
+The list of dependencies required to install this package is: dplyr, ggplot2, knitr, lubridate, magrittr, readr, rmarkdown, testthat.
+
+To install the package, you can run the following script
+
+```{r, echo=TRUE, eval=FALSE}
+# install.packages("remotes")
+remotes::install_local(path = "userpackage.0.0.0.9000.tar.gz")
+```
+
+In case something went wrong, you may want to install dependencies before using:
+
+```{r, echo=TRUE, eval=FALSE}
+# No Remotes ----
+# Attachments ----
+to_install <- c("dplyr", "ggplot2", "magrittr")
+  for (i in to_install) {
+    message(paste("looking for ", i))
+    if (!requireNamespace(i)) {
+      message(paste("     installing", i))
+      install.packages(i)
+    }
+  }
+```
+
+<!-- install: end -->
+
+## Reminder of the workflow
+
+1. **Directly create a new "R package using devtools"**  
+    + `usethis::create_package("my.project")` if forgotten
+1. Create "dev_history.R" at the root
+    + Use it to store all your `usethis::` and co...
+1. Fill in DESCRIPTION file
+1. Create a small dataset (reprex)
+    + Store in "inst/example-data" (or in "data")
+1. "Rmd first": Create a vignette
+    + `usethis::use_vignette("aa-exploration")`
+1. **Build your functions along with vignette**
+    + Document parameters
+    + Add example of use
+    + Store in "R/" (`usethis_use_r()`)
+    + Run `attachment::att_amend_desc()`
+    + Add unit tests
+1. Check your package regularly (`devtools::check()`)
+1. Use git and continuous integration
+1. Show your work to your colleagues and customers (`pkgdown::build_site()`)
+

@@ -1,0 +1,75 @@
+---
+title: "Squirrels"
+author: "Sébastien Rochette"
+date: "02/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## List all packages needed
+
+```{r}
+library(readr)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+```
+
+
+## Read and clean the dataset
+
+This week's data is from the [NYC Squirrel Census](https://www.thesquirrelcensus.com/) - raw data at [NY Data portal](https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw).  
+
+- This dataset is saved as a csv file in the project.  
+- Column `date` needs to be transformed as date.  
+- Column `age` needs to be cleaned up: `?` => `NA`
+
+
+<!-- Add a chunk: Ctrl + Alt + I -->
+```{r}
+# data cleaning could be in "data-raw"
+nyc_squirrels <- read_csv("data-raw/nyc_squirrels.csv") %>% 
+  mutate(
+    date = mdy(date),
+    age = if_else(age == "?", NA_character_, age)
+  )
+
+glimpse(nyc_squirrels)
+```
+
+## Filter, count and plot
+
+- Parameter to choose age group to be kept for analysis
+- Filter on age group
+- Count number of individual according to fur color
+- Plot counts according to fur color
+    + Create title according to age chosen
+
+```{r}
+my_age <- c("Adult", "Juvenile")[1]
+
+squirrels_filtered <- nyc_squirrels %>% 
+  filter(age %in% my_age) %>% 
+  count(primary_fur_color)
+
+ggplot(squirrels_filtered) +
+  aes(x = primary_fur_color, y = n, fill = primary_fur_color) +
+  geom_col() +
+  scale_fill_manual(
+    values = c("Cinnamon" = "#D2691E",
+               "Black" = "black",
+               "Gray" = "gray40"),
+    na.value = "cyan4") +
+  labs(
+    title = paste("Count of", tolower(my_age), "squirrels by fur color"),
+    x = "Primary fur color",
+    y = "Count"
+  ) + 
+  guides(fill = FALSE) +
+  theme_classic()
+```
+
+> Separately analyse juveniles and adults

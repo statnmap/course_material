@@ -1,0 +1,74 @@
+---
+title: "my-analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{aa-my-analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(userpackage)
+```
+
+## List all packages needed
+
+```{r}
+library(readr)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(testthat)
+```
+
+
+## Read and clean the dataset
+
+This week's data is from the [NYC Squirrel Census](https://www.thesquirrelcensus.com/) - raw data at [NY Data portal](https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw).  
+
+- This dataset is saved as a csv file in the project.  
+- Column `date` needs to be transformed as date.  
+- Column `age` needs to be cleaned up: `?` => `NA`
+
+
+<!-- Add a chunk: Ctrl + Alt + I -->
+```{r}
+# data cleaning could be in "data-raw"
+path <- system.file("example-data/nyc_squirrels.csv", package = "userpackage")
+nyc_squirrels <- read_csv(path) %>% 
+  mutate(
+    date = mdy(date),
+    age = if_else(age == "?", NA_character_, age)
+  )
+
+glimpse(nyc_squirrels)
+```
+
+## Filter, count and plot
+
+- Parameter to choose age group to be kept for analysis
+- Filter on age group
+- Count number of individual according to fur color
+
+```{r}
+# Data analysis
+squirrels_filtered <- filter_count(x = nyc_squirrels, my_age = "Adult")
+```
+
+- Plot counts according to fur color
+    + Create title according to age chosen
+
+```{r}
+# Data analysis
+filter_count(x = nyc_squirrels, my_age = "Adult") %>% 
+  plot_count(my_age = "Adult")
+```
+
+> Separately analyse juveniles and adults
