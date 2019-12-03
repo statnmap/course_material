@@ -6,8 +6,13 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE
+)
 ```
+
+> **Transform code into functions**
 
 ## List all packages needed
 
@@ -89,7 +94,7 @@ plot_count <- function(x, my_age = "all") {
 }
 # Example
 filter_count(x = nyc_squirrels, my_age = "Adult") %>% 
-  plot_filtered(my_age = "Adult")
+  plot_count(my_age = "Adult")
 ```
 
 > Separately analyse juveniles and adults

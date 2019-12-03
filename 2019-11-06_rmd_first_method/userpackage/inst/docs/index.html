@@ -72,7 +72,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/my-analysis.html">my-analysis</a>
+      <a href="articles/aa-my-analysis.html">my-analysis</a>
     </li>
   </ul>
 </li>
@@ -99,8 +99,79 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-Clean and prepare NYC squirrel dataset. Analyse
-    data.
+<div id="userpackage" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#userpackage" class="anchor"></a>userpackage</h1></div>
+<!-- badges: start -->
+<!-- badges: end -->
+<!-- description: start -->
+<p>This is package {userpackage}: Analyse NYC Squirrel Dataset.<br>
+The aim of {userpackage} is to propose an example package built with “Rmd first” method during conferences and tutorials. Current version is 0.0.0.9000. <!-- description: end --></p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<!-- install: start -->
+<p>The list of dependencies required to install this package is: dplyr, ggplot2, knitr, lubridate, magrittr, readr, rmarkdown, testthat.</p>
+<p>To install the package, you can run the following script</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("remotes")</span></a>
+<a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_local.html">install_local</a></span>(<span class="dt">path =</span> <span class="st">"userpackage.0.0.0.9000.tar.gz"</span>)</a></code></pre></div>
+<p>In case something went wrong, you may want to install dependencies before using:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># No Remotes ----</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"># Attachments ----</span></a>
+<a class="sourceLine" id="cb2-3" title="3">to_install &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"magrittr"</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="cf">for</span> (i <span class="cf">in</span> to_install) {</a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="kw"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"looking for "</span>, i))</a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(i)) {</a>
+<a class="sourceLine" id="cb2-7" title="7">      <span class="kw"><a href="https://rdrr.io/r/base/message.html">message</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"     installing"</span>, i))</a>
+<a class="sourceLine" id="cb2-8" title="8">      <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(i)</a>
+<a class="sourceLine" id="cb2-9" title="9">    }</a>
+<a class="sourceLine" id="cb2-10" title="10">  }</a></code></pre></div>
+<!-- install: end -->
+</div>
+<div id="reminder-of-the-workflow" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reminder-of-the-workflow" class="anchor"></a>Reminder of the workflow</h2>
+<ol>
+<li>
+<strong>Directly create a new “R package using devtools”</strong>
+<ul>
+<li>
+<code><a href="https://usethis.r-lib.org/reference/create_package.html">usethis::create_package("my.project")</a></code> if forgotten</li>
+</ul>
+</li>
+<li>Create “dev_history.R” at the root
+<ul>
+<li>Use it to store all your <code>usethis::</code> and co…</li>
+</ul>
+</li>
+<li>Fill in DESCRIPTION file</li>
+<li>Create a small dataset (reprex)
+<ul>
+<li>Store in “inst/example-data” (or in “data”)</li>
+</ul>
+</li>
+<li>“Rmd first”: Create a vignette
+<ul>
+<li><code><a href="https://usethis.r-lib.org/reference/use_vignette.html">usethis::use_vignette("aa-exploration")</a></code></li>
+</ul>
+</li>
+<li>
+<strong>Build your functions along with vignette</strong>
+<ul>
+<li>Document parameters</li>
+<li>Add example of use</li>
+<li>Store in “R/” (<code>usethis_use_r()</code>)</li>
+<li>Run <code><a href="https://rdrr.io/pkg/attachment/man/att_to_description.html">attachment::att_amend_desc()</a></code>
+</li>
+<li>Add unit tests</li>
+</ul>
+</li>
+<li>Check your package regularly (<code><a href="https://rdrr.io/pkg/devtools/man/check.html">devtools::check()</a></code>)</li>
+<li>Use git and continuous integration</li>
+<li>Show your work to your colleagues and customers (<code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code>)</li>
+</ol>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

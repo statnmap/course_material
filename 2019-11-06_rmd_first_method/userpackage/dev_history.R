@@ -20,6 +20,7 @@ attachment::att_amend_desc()
 
 # Check package
 devtools::check()
+# devtools::
 
 # Manage globalVariables
 # remotes::install_github("ThinkR-open/checkhelper")
